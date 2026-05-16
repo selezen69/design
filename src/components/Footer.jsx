@@ -1,0 +1,20 @@
+export default function Footer() {
+  return (
+    <footer className="bg-graphite py-10 px-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <span className="font-serif text-lg tracking-widest uppercase text-silver/60">
+          Studio
+        </span>
+        <p className="text-silver/30 text-xs tracking-wide">
+          © {new Date().getFullYear()} Анна Ковалёва. Дизайн интерьеров.
+        </p>
+        <a
+          href="https://t.me/yourhandle"
+          className="text-silver/40 hover:text-accent text-xs tracking-widest uppercase transition-colors"
+        >
+          Telegram
+        </a>
+      </div>
+    </footer>
+  );
+}
