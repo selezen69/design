@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  /* Design Tokens — Premium Interior Designer */
+  --color-graphite: #1a1a1a;
+  --color-charcoal: #2d2d2d;
+  --color-stone: #6b6b6b;
+  --color-silver: #c4c4c4;
+  --color-fog: #f0efed;
+  --color-beige: #e8e0d5;
+  --color-cream: #faf8f5;
+  --color-white: #ffffff;
+  --color-accent: #c9a96e;
+
+  --font-serif: "Cormorant Garamond", "Georgia", serif;
+  --font-sans: "Inter", "system-ui", sans-serif;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-graphite);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+}
