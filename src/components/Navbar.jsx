@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { studio } from "../data/studio";
 
 const NAV_LINKS = [
   { href: "#portfolio", label: "Портфолио" },
@@ -28,7 +29,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <a href="#" className="font-serif text-xl tracking-widest uppercase text-graphite">
-          Studio
+          {studio.logoText}
         </a>
 
         {/* Desktop nav */}
@@ -43,14 +44,6 @@ export default function Navbar() {
             </a>
           ))}
         </nav>
-
-        {/* CTA */}
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-graphite text-cream text-sm tracking-wider uppercase hover:bg-charcoal transition-colors"
-        >
-          Обсудить проект
-        </a>
 
         {/* Burger */}
         <button
@@ -79,7 +72,7 @@ export default function Navbar() {
           ))}
           <a
             href="#contact"
-            className="mt-2 inline-flex justify-center px-5 py-3 bg-graphite text-cream text-sm tracking-wider uppercase"
+            className="mt-2 inline-flex justify-center px-5 py-3 bg-graphite text-cream text-sm tracking-wider uppercase hover:bg-charcoal transition-colors"
             onClick={() => setMenuOpen(false)}
           >
             Обсудить проект

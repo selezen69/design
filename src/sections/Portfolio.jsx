@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { projects, projectTypes } from "../data/portfolio";
+import { projectSubtitle } from "../utils/projectDisplay";
 
-export default function Portfolio() {
+export default function Portfolio({ onSelectProject }) {
   const [activeType, setActiveType] = useState("all");
 
   const filtered =
@@ -10,10 +11,10 @@ export default function Portfolio() {
       : projects.filter((p) => p.type === activeType);
 
   return (
-    <section id="portfolio" className="py-24 bg-cream">
+    <section id="portfolio" className="py-24 md:py-32 bg-cream">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-20">
           <div>
             <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">
               Работы
@@ -24,15 +25,15 @@ export default function Portfolio() {
           </div>
 
           {/* Filter */}
-          <div className="flex gap-1">
+          <div className="flex gap-8">
             {projectTypes.map((t) => (
               <button
                 key={t.value}
                 onClick={() => setActiveType(t.value)}
-                className={`px-5 py-2 text-xs tracking-widest uppercase transition-colors ${
+                className={`text-xs tracking-[0.3em] uppercase pb-1 border-b transition-colors duration-300 ${
                   activeType === t.value
-                    ? "bg-graphite text-cream"
-                    : "bg-fog text-stone hover:bg-beige"
+                    ? "text-graphite border-graphite"
+                    : "text-silver border-transparent hover:text-stone"
                 }`}
               >
                 {t.label}
@@ -42,9 +43,13 @@ export default function Portfolio() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((project, i) => (
-            <ProjectCard key={project.id} project={project} featured={i === 0} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 gap-y-16 lg:gap-y-24">
+          {filtered.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              onClick={() => onSelectProject(project)}
+            />
           ))}
         </div>
       </div>
@@ -52,40 +57,25 @@ export default function Portfolio() {
   );
 }
 
-function ProjectCard({ project, featured }) {
+function ProjectCard({ project, onClick }) {
   return (
-    <div
-      className={`group relative overflow-hidden bg-fog cursor-pointer ${
-        featured ? "md:col-span-2 md:row-span-1" : ""
-      }`}
-    >
+    <div onClick={onClick} className="group cursor-pointer">
       {/* Image */}
-      <div className="relative overflow-hidden aspect-[4/3]">
+      <div className="relative overflow-hidden bg-fog aspect-[4/3]">
         <img
           src={project.cover}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.035]"
         />
-        <div className="absolute inset-0 bg-graphite/0 group-hover:bg-graphite/30 transition-all duration-500" />
       </div>
 
       {/* Info */}
-      <div className="p-5">
-        <div className="flex items-start justify-between">
-          <div>
-            <h3 className="font-serif text-xl text-graphite font-light mb-1">
-              {project.title}
-            </h3>
-            <p className="text-stone text-sm">
-              {project.location} · {project.area} м²
-            </p>
-          </div>
-          <span className="text-xs tracking-widest text-silver uppercase mt-1">
-            {project.year}
-          </span>
-        </div>
-        <p className="text-stone text-sm mt-3 leading-relaxed line-clamp-2">
-          {project.description}
+      <div className="pt-7">
+        <h3 className="font-serif text-2xl text-graphite font-light leading-tight line-clamp-2 min-h-[4rem] transition-colors duration-500 group-hover:text-accent">
+          {project.title}
+        </h3>
+        <p className="text-stone text-xs tracking-[0.15em] uppercase mt-2 leading-relaxed line-clamp-2 min-h-[2.5rem]">
+          {projectSubtitle(project)}
         </p>
       </div>
     </div>
