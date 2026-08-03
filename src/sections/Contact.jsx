@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { studio } from "../data/studio";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", type: "", message: "" });
@@ -34,18 +35,18 @@ export default function Contact() {
 
             <div className="space-y-4">
               <a
-                href="https://t.me/yourhandle"
+                href={`https://t.me/${studio.telegram}`}
                 className="flex items-center gap-4 text-graphite hover:text-accent transition-colors"
               >
                 <span className="text-2xl">✈</span>
-                <span className="text-sm tracking-wide">Telegram @yourhandle</span>
+                <span className="text-sm tracking-wide">Telegram @{studio.telegram}</span>
               </a>
               <a
-                href="tel:+79001234567"
+                href={`tel:${studio.phone.replace(/\s|-/g, "")}`}
                 className="flex items-center gap-4 text-graphite hover:text-accent transition-colors"
               >
                 <span className="text-2xl">☎</span>
-                <span className="text-sm tracking-wide">+7 900 123-45-67</span>
+                <span className="text-sm tracking-wide">{studio.phone}</span>
               </a>
             </div>
           </div>
