@@ -1,8 +1,8 @@
 import { studio } from "../data/studio";
 
-export default function About() {
+export default function About({ id = "about" } = {}) {
   return (
-    <section id="about" className="py-24 bg-white">
+    <section id={id} className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Photo */}

@@ -29,9 +29,9 @@ const STEPS = [
   },
 ];
 
-export default function Process() {
+export default function Process({ id = "process" } = {}) {
   return (
-    <section id="process" className="py-24 bg-graphite">
+    <section id={id} className="py-24 bg-graphite">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-14">
           <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">

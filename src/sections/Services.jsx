@@ -29,9 +29,9 @@ const SERVICES = [
   },
 ];
 
-export default function Services() {
+export default function Services({ id = "services" } = {}) {
   return (
-    <section id="services" className="py-24 bg-fog">
+    <section id={id} className="py-24 bg-fog">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-14">
           <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { studio } from "../data/studio";
 
-export default function Contact() {
+export default function Contact({ initialStatus = "idle", id = "contact" } = {}) {
   const [form, setForm] = useState({ name: "", phone: "", type: "", message: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | done
+  const [status, setStatus] = useState(initialStatus); // idle | sending | done
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -16,7 +16,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section id={id} className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left */}
