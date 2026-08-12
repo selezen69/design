@@ -5,11 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "node server.js",
     "build": "vite build",
+    "start": "node server.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.23.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },

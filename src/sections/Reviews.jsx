@@ -1,9 +1,9 @@
 // TODO: добавить реальные отзывы клиентов сюда по мере поступления.
 const REVIEWS = [];
 
-export default function Reviews() {
+export default function Reviews({ id = "reviews" } = {}) {
   return (
-    <section id="reviews" className="py-24 bg-beige">
+    <section id={id} className="py-24 bg-beige">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-14">
           <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">

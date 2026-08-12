@@ -10,8 +10,8 @@ const NAV_LINKS = [
   { href: "#contact", label: "Контакт" },
 ];
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar({ initialScrolled = false } = {}) {
+  const [scrolled, setScrolled] = useState(initialScrolled);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {

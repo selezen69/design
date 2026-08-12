@@ -2,8 +2,8 @@ import { useState } from "react";
 import { projects, projectTypes } from "../data/portfolio";
 import { projectSubtitle } from "../utils/projectDisplay";
 
-export default function Portfolio({ onSelectProject }) {
-  const [activeType, setActiveType] = useState("all");
+export default function Portfolio({ onSelectProject, initialType = "all", id = "portfolio" }) {
+  const [activeType, setActiveType] = useState(initialType);
 
   const filtered =
     activeType === "all"
@@ -11,7 +11,7 @@ export default function Portfolio({ onSelectProject }) {
       : projects.filter((p) => p.type === activeType);
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 bg-cream">
+    <section id={id} className="py-24 md:py-32 bg-cream">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-20">
