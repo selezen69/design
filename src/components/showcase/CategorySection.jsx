@@ -10,9 +10,7 @@ export default function CategorySection({ id, title, description, children }) {
             <p className="text-stone text-sm leading-relaxed">{description}</p>
           )}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-          {children}
-        </div>
+        <div className="flex flex-col gap-14">{children}</div>
       </div>
     </section>
   );

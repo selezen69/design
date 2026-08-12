@@ -3,16 +3,25 @@ import { studio } from "../data/studio";
 
 export default function Contact({ initialStatus = "idle", id = "contact" } = {}) {
   const [form, setForm] = useState({ name: "", phone: "", type: "", message: "" });
-  const [status, setStatus] = useState(initialStatus); // idle | sending | done
+  const [status, setStatus] = useState(initialStatus); // idle | sending | done | error
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
-    // TODO: connect to real API / Telegram bot
-    setTimeout(() => setStatus("done"), 1500);
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) throw new Error("request failed");
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -107,6 +116,18 @@ export default function Contact({ initialStatus = "idle", id = "contact" } = {})
                     className="w-full border-b border-silver bg-transparent py-3 text-sm text-graphite placeholder-silver/60 focus:outline-none focus:border-graphite transition-colors resize-none"
                   />
                 </div>
+                {status === "error" && (
+                  <p className="text-sm text-red-600">
+                    Не удалось отправить заявку. Попробуйте ещё раз или напишите в{" "}
+                    <a
+                      href={`https://t.me/${studio.telegram}`}
+                      className="underline hover:text-graphite"
+                    >
+                      Telegram
+                    </a>
+                    .
+                  </p>
+                )}
                 <button
                   type="submit"
                   disabled={status === "sending"}

@@ -95,74 +95,74 @@ export default function Showcase() {
       </header>
 
       <p className="max-w-7xl mx-auto px-6 pt-8 pb-2 text-stone text-sm leading-relaxed">
-        Все карточки ниже — уменьшенные копии настоящих компонентов проекта
-        (без изменений разметки и стилей), в том же окружении и с теми же
-        данными, что и на реальном сайте. Экраны живые: кликайте по фильтрам
-        портфолио, открывайте и закрывайте карточку проекта, заполняйте форму
-        контакта — все переходы происходят внутри рамки и не уводят со
-        страницы /showcase.
+        Ниже — настоящие компоненты проекта в натуральную величину, без
+        уменьшения масштаба: те же кнопки, поля и хиткасты, что и на
+        реальном сайте. У каждого интерактивного блока есть подсказка 👉,
+        что именно можно нажать. Все переходы происходят внутри /showcase.
       </p>
 
       {/* 1. Full page composition */}
       <CategorySection
         id="cat-full-page"
         title="Страница целиком"
-        description="Полная композиция главной страницы — тот же Navbar, состояние выбранного проекта и данные, что и в реальном App.jsx."
+        description="Полная композиция главной страницы — тот же Navbar, состояние выбранного проекта и данные, что и в реальном App.jsx. Окно прокручивается, содержимое — в реальном масштабе."
       >
-        <div className="sm:col-span-2 lg:col-span-3">
-          <ShowcaseFrame
-            title="Главная страница"
-            note="Navbar → Hero → Портфолио → О студии → Услуги → Этапы → Отзывы → Контакты → Footer. Ссылки навигации и клик по проекту работают по-настоящему."
-            designWidth={1440}
-            height={900}
-          >
-            <FullPage />
-          </ShowcaseFrame>
-        </div>
+        <ShowcaseFrame
+          title="Главная страница"
+          note="Navbar → Hero → Портфолио → О студии → Услуги → Этапы → Отзывы → Контакты → Footer"
+          hint="Прокрутите рамку вниз, кликните по ссылке меню («Портфолио», «Контакт»…) или по карточке проекта — карточка откроется поверх этой же рамки, «Назад к портфолио» вернёт обратно."
+          contained
+          maxHeight={720}
+        >
+          <FullPage />
+        </ShowcaseFrame>
       </CategorySection>
 
       {/* 2. Landing sections */}
       <CategorySection
         id="cat-sections"
         title="Секции лендинга"
-        description="Отдельные блоки главной страницы, включая все состояния формы контактов."
+        description="Отдельные блоки главной страницы в реальном масштабе, включая все состояния формы контактов."
       >
-        <ShowcaseFrame title="Hero" note="Заглавный экран" height={260}>
+        <ShowcaseFrame
+          title="Hero"
+          note="Заглавный экран"
+          hint="Кнопки «Смотреть портфолио» и «Обсудить проект» — рабочие ссылки на разделы «Страница целиком» выше (в пределах /showcase)."
+          contained
+          maxHeight={520}
+        >
           <Hero />
         </ShowcaseFrame>
 
-        <ShowcaseFrame title="О студии" note="About" height={340}>
+        <ShowcaseFrame title="О студии" note="About — статичный блок, интерактива нет">
           <About id="about-demo" />
         </ShowcaseFrame>
 
-        <ShowcaseFrame title="Услуги" note="Services" height={360}>
+        <ShowcaseFrame title="Услуги" note="Services — статичный блок, интерактива нет">
           <Services id="services-demo" />
         </ShowcaseFrame>
 
-        <ShowcaseFrame title="Этапы работы" note="Process" height={320}>
+        <ShowcaseFrame title="Этапы работы" note="Process — статичный блок, интерактива нет">
           <Process id="process-demo" />
         </ShowcaseFrame>
 
         <ShowcaseFrame
           title="Отзывы — пустое состояние"
           note="Реальных отзывов пока нет в данных студии, поэтому единственное существующее состояние — заглушка"
-          height={220}
         >
           <Reviews id="reviews-demo" />
         </ShowcaseFrame>
 
         <ShowcaseFrame
           title="Контакты — заполнение"
-          note="Живая форма: введите данные и нажмите «Отправить заявку», чтобы увидеть переход в состояния «отправка» → «успех»"
-          height={420}
+          hint="Впишите имя и телефон и нажмите «Отправить заявку» — форма реально перейдёт в состояние «отправка», а через полторы секунды — в «успех»."
         >
           <Contact id="contact-demo-idle" initialStatus="idle" />
         </ShowcaseFrame>
 
         <ShowcaseFrame
           title="Контакты — отправка"
-          note="Состояние sending (кнопка задизейблена) — возникает сразу после отправки формы"
-          height={420}
+          note="Состояние sending: кнопка задизейблена на время «запроса» — возникает сразу после отправки формы выше"
         >
           <Contact id="contact-demo-sending" initialStatus="sending" />
         </ShowcaseFrame>
@@ -170,7 +170,6 @@ export default function Showcase() {
         <ShowcaseFrame
           title="Контакты — успех"
           note="Состояние done, показывается после отправки формы"
-          height={420}
         >
           <Contact id="contact-demo-done" initialStatus="done" />
         </ShowcaseFrame>
@@ -180,21 +179,33 @@ export default function Showcase() {
       <CategorySection
         id="cat-portfolio"
         title="Портфолио и карточка проекта"
-        description="Сетка портфолио с рабочими фильтрами. Кликните по любому проекту — откроется настоящая карточка проекта, «Назад к портфолио» закрывает её обратно."
+        description="Сетка портфолио с рабочими фильтрами в реальном масштабе. Каждая рамка — самостоятельная живая копия: свой фильтр, свой открытый/закрытый проект."
       >
         <ShowcaseFrame
           title="Портфолио — «Все»"
-          note="Фильтр по умолчанию. У части проектов (например, «Лофт в саду») не заполнены площадь, локация и год — карточка проекта отображает только то, что есть в данных."
-          height={460}
+          note="Фильтр по умолчанию"
+          hint="Переключите «Все / Квартиры / Дома» вверху сетки и кликните по любому проекту — откроется настоящая карточка проекта (например, у «Лофт в саду» не заполнены площадь, локация и год — карточка честно показывает только то, что есть в данных). «Назад к портфолио» закрывает её обратно."
+          contained
+          maxHeight={680}
         >
           <PortfolioWithDetail id="portfolio-demo-all" initialType="all" />
         </ShowcaseFrame>
 
-        <ShowcaseFrame title="Портфолио — «Квартиры»" height={460}>
+        <ShowcaseFrame
+          title="Портфолио — «Квартиры»"
+          hint="Здесь фильтр открывается сразу на «Квартиры» — переключайте и кликайте по проектам так же, как выше."
+          contained
+          maxHeight={680}
+        >
           <PortfolioWithDetail id="portfolio-demo-apartment" initialType="apartment" />
         </ShowcaseFrame>
 
-        <ShowcaseFrame title="Портфолио — «Дома»" height={460}>
+        <ShowcaseFrame
+          title="Портфолио — «Дома»"
+          hint="Фильтр открывается сразу на «Дома»."
+          contained
+          maxHeight={680}
+        >
           <PortfolioWithDetail id="portfolio-demo-house" initialType="house" />
         </ShowcaseFrame>
       </CategorySection>
@@ -203,17 +214,31 @@ export default function Showcase() {
       <CategorySection
         id="cat-navigation"
         title="Навигация"
-        description="Верхнее меню в обычном и проскролленном состоянии, футер. Ссылки ведут к разделам блока «Страница целиком» выше."
+        description="Верхнее меню в обычном и проскролленном состоянии (принудительно, для сравнения — на реальном сайте оно переключается при прокрутке), футер."
       >
-        <ShowcaseFrame title="Navbar — вверху страницы" note="Прозрачный фон" height={90}>
+        <ShowcaseFrame
+          title="Navbar — вверху страницы"
+          note="Прозрачный фон"
+          hint="На узком экране справа появится кнопка ☰ — нажмите, чтобы открыть мобильное меню."
+          contained
+          maxHeight={140}
+        >
           <Navbar initialScrolled={false} />
         </ShowcaseFrame>
 
-        <ShowcaseFrame title="Navbar — при скролле" note="Белый фон, тень" height={90}>
+        <ShowcaseFrame
+          title="Navbar — при скролле"
+          note="Белый фон, тень"
+          contained
+          maxHeight={140}
+        >
           <Navbar initialScrolled={true} />
         </ShowcaseFrame>
 
-        <ShowcaseFrame title="Footer" height={140}>
+        <ShowcaseFrame
+          title="Footer"
+          note="Ссылка Telegram — настоящая внешняя ссылка, как и на реальном сайте, поэтому открывает t.me"
+        >
           <Footer />
         </ShowcaseFrame>
       </CategorySection>
