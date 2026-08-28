@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import express from "express";
 import pg from "pg";
+import nodemailer from "nodemailer";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const { Pool } = pg;
@@ -24,16 +25,26 @@ const PROJECT_TYPE_LABELS = {
   other: "Другое",
 };
 
-async function notifyTelegram({ name, phone, type, message }) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) {
-    console.warn("Telegram notification skipped: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not set");
+const mailTransporter = process.env.EMAIL_USER
+  ? nodemailer.createTransport({
+      host: process.env.EMAIL_HOST || "smtp.mail.ru",
+      port: Number(process.env.EMAIL_PORT) || 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    })
+  : null;
+
+async function notifyEmail({ name, phone, type, message }) {
+  if (!mailTransporter) {
+    console.warn("Email notification skipped: EMAIL_USER is not set");
     return;
   }
 
   const text = [
-    "📩 Новая заявка с сайта",
+    "Новая заявка с сайта",
     `Имя: ${name}`,
     `Телефон/Telegram: ${phone}`,
     `Тип объекта: ${PROJECT_TYPE_LABELS[type] ?? "—"}`,
@@ -42,15 +53,12 @@ async function notifyTelegram({ name, phone, type, message }) {
     .filter(Boolean)
     .join("\n");
 
-  const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, text }),
+  await mailTransporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+    subject: "Новая заявка с сайта",
+    text,
   });
-
-  if (!response.ok) {
-    throw new Error(`Telegram API responded with ${response.status}`);
-  }
 }
 
 const app = express();
@@ -76,13 +84,11 @@ app.post("/api/leads", async (req, res) => {
     return res.status(500).json({ error: "Failed to save lead" });
   }
 
-  try {
-    await notifyTelegram({ name: name.trim(), phone: phone.trim(), type: projectType, message: trimmedMessage });
-  } catch (err) {
-    console.error("Failed to send Telegram notification:", err);
-  }
-
   res.status(201).json({ ok: true });
+
+  notifyEmail({ name: name.trim(), phone: phone.trim(), type: projectType, message: trimmedMessage }).catch(
+    (err) => console.error("Failed to send email notification:", err)
+  );
 });
 
 const distPath = path.join(__dirname, "dist");
