@@ -51,7 +51,7 @@ export const projects = [
     description:
       "Лофт-эстетика в загородном доме: кирпичная стена, тёплое дерево и терраса, растворяющаяся в саду.",
     materials: "Декоративный кирпич, натуральный камень, дерево",
-    photoCount: 13,
+    photoCount: 14,
     cover: "/projects/zelenyi-mys/cover.jpg",
     photos: [
       "/projects/zelenyi-mys/photo-01.jpg",
@@ -67,6 +67,7 @@ export const projects = [
       "/projects/zelenyi-mys/photo-11.jpg",
       "/projects/zelenyi-mys/photo-12.jpg",
       "/projects/zelenyi-mys/photo-13.jpg",
+      "/projects/zelenyi-mys/photo-14.jpg",
     ],
   },
   {
