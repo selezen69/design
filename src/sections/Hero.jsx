@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-graphite">
-      {/* Background image */}
+    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-graphite">
+      {/* Background image — существующее реальное фото проекта */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-45 animate-[hero-kenburns_24s_ease-in-out_infinite_alternate]"
         style={{
@@ -24,17 +24,17 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <div
-          className="w-px h-10 bg-accent/70 mx-auto mb-6 opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.1s_forwards]"
+          className="w-px h-8 bg-accent/70 mx-auto mb-4 opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.1s_forwards]"
         />
-        <p className="text-accent text-xs tracking-[0.4em] uppercase mb-6 opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.2s_forwards]">
+        <p className="text-accent text-xs tracking-[0.4em] uppercase mb-4 opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.2s_forwards]">
           Дизайн интерьеров премиум-класса
         </p>
-        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-light leading-tight mb-8 opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.35s_forwards]">
+        <h1 className="font-serif text-[clamp(2.5rem,8vw,6rem)] text-white font-light leading-[1.05] mb-6 opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.35s_forwards]">
           Пространство,
           <br />
           <em>которое живёт</em>
         </h1>
-        <p className="text-silver text-lg md:text-xl max-w-xl mx-auto mb-12 leading-relaxed opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.5s_forwards]">
+        <p className="text-silver text-base md:text-lg max-w-xl mx-auto mb-8 leading-relaxed opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.5s_forwards]">
           Создаём интерьеры для квартир и загородных домов,
           в которых каждая деталь — осмысленный выбор.
         </p>
@@ -55,10 +55,10 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — мягкое "дыхание" вместо мигания (motion-spec.md §3) */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-silver/60">
         <span className="text-xs tracking-widest uppercase">Scroll</span>
-        <div className="w-px h-12 bg-silver/30 animate-pulse" />
+        <div className="w-px h-3 bg-silver/50 animate-[hero-breathe_1600ms_ease-in-out_infinite_alternate]" />
       </div>
     </section>
   );
