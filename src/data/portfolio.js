@@ -122,7 +122,31 @@ export const projects = [
       "/projects/lobachevskogo/photo-10.jpg",
     ],
   },
-  // Площадь / местоположение / год для этих трёх проектов не указаны — уточнить у клиента.
+  {
+    id: 5,
+    slug: "lukomorye",
+    title: "Лукоморье",
+    type: "house",
+    typeLabel: "Загородный дом",
+    area: 800,
+    location: "Посёлок Лукоморье",
+    photoCount: 10,
+    cover: "/projects/lukomorye/cover.webp",
+    photos: [
+      "/projects/lukomorye/photo-01.webp",
+      "/projects/lukomorye/photo-02.webp",
+      "/projects/lukomorye/photo-03.webp",
+      "/projects/lukomorye/photo-04.webp",
+      "/projects/lukomorye/photo-05.webp",
+      "/projects/lukomorye/photo-06.webp",
+      "/projects/lukomorye/photo-07.webp",
+      "/projects/lukomorye/photo-08.webp",
+      "/projects/lukomorye/photo-09.webp",
+      "/projects/lukomorye/photo-10.webp",
+    ],
+  },
+  // Площадь / местоположение / год / стиль / описание для проекта «Лукоморье»,
+  // а также для трёх проектов выше, не указаны — уточнить у клиента.
 ];
 
 export const projectTypes = [
