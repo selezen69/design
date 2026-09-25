@@ -1,13 +1,54 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { projectSubtitle } from "../utils/projectDisplay";
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export default function ProjectDetail({ project, onClose }) {
+  const dialogRef = useRef(null);
+  const backButtonRef = useRef(null);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
   }, []);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    backButtonRef.current?.focus();
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll(FOCUSABLE_SELECTOR)
+      ).filter((el) => el.offsetParent !== null);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus?.();
+    };
+  }, [onClose]);
 
   if (!project) return null;
 
@@ -19,11 +60,18 @@ export default function ProjectDetail({ project, onClose }) {
   );
 
   return (
-    <div className="fixed inset-0 z-[60] bg-cream overflow-y-auto">
+    <div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-detail-title"
+      className="fixed inset-0 z-[60] bg-cream overflow-y-auto"
+    >
       {/* Close bar */}
       <div className="fixed top-0 left-0 right-0 z-10 bg-cream/95 backdrop-blur-sm border-b border-fog">
         <div className="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
           <button
+            ref={backButtonRef}
             onClick={onClose}
             className="text-sm tracking-wider text-stone hover:text-graphite transition-colors uppercase flex items-center gap-2"
           >
@@ -52,7 +100,10 @@ export default function ProjectDetail({ project, onClose }) {
             <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">
               {projectSubtitle(project)}
             </p>
-            <h1 className="font-serif text-4xl md:text-6xl text-cream font-light">
+            <h1
+              id="project-detail-title"
+              className="font-serif text-4xl md:text-6xl text-cream font-light"
+            >
               {project.title}
             </h1>
           </div>
