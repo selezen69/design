@@ -175,7 +175,7 @@ function Spread({ project, index, total, spread, onClick, lively }) {
                 opacity: visible ? 1 : 0,
               }
         }
-        className={`relative overflow-hidden bg-fog aspect-[3/2] ${spread.ratio} ${spread.photoCol} order-1 ${
+        className={`relative overflow-hidden bg-fog aspect-[3/2] ${spread.ratio} ${spread.photoCol} order-1 lg:row-start-1 ${
           lively
             ? "transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
             : "transition-[transform,opacity] duration-[650ms] ease-out"
@@ -202,7 +202,7 @@ function Spread({ project, index, total, spread, onClick, lively }) {
         </div>
       </div>
 
-      <div className={`${spread.textCol} order-2`}>
+      <div className={`${spread.textCol} order-2 lg:row-start-1`}>
         <p
           style={lively ? liveChildStyle({ visible, direction, delayMs: baseDelay + LIVE_STAGGER_STEP * 1 }) : undefined}
           className={`font-serif text-5xl text-stone/40 font-light mb-4 ${lively ? LIVE_CHILD_TRANSITION : ""}`}
