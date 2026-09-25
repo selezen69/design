@@ -11,6 +11,13 @@ export default function ProjectDetail({ project, onClose }) {
 
   if (!project) return null;
 
+  const hasMeta = Boolean(
+    project.area || project.location || project.year || project.style,
+  );
+  const hasNarrative = Boolean(
+    project.description || project.clientTask || project.materials,
+  );
+
   return (
     <div className="fixed inset-0 z-[60] bg-cream overflow-y-auto">
       {/* Close bar */}
@@ -34,14 +41,14 @@ export default function ProjectDetail({ project, onClose }) {
 
       {/* Hero */}
       <div className="relative pt-16 md:pt-20">
-        <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+        <div className="relative aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] overflow-hidden">
           <img
             src={project.cover}
             alt={project.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-graphite/10 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-6 pb-10 w-full">
+          <div className="absolute inset-0 bg-gradient-to-t from-graphite/85 via-graphite/20 to-transparent sm:from-graphite/70 sm:via-graphite/10" />
+          <div className="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-6 pb-8 sm:pb-10 w-full">
             <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">
               {projectSubtitle(project)}
             </p>
@@ -54,58 +61,72 @@ export default function ProjectDetail({ project, onClose }) {
 
       {/* Meta + description */}
       <div className="max-w-7xl mx-auto px-6 py-14">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 pb-12 border-b border-fog">
-          {project.area && <Meta label="Площадь" value={`${project.area} м²`} />}
-          {project.location && <Meta label="Местоположение" value={project.location} />}
-          {project.year && <Meta label="Год" value={project.year} />}
-          {project.style && <Meta label="Стиль" value={project.style} />}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-14">
-          <div className="md:col-span-2">
-            <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">
-              Описание проекта
-            </p>
-            <p className="text-stone text-lg leading-relaxed">
-              {project.description}
-            </p>
+        {hasMeta && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 pb-12 border-b border-fog">
+            {project.area && <Meta label="Площадь" value={`${project.area} м²`} />}
+            {project.location && <Meta label="Местоположение" value={project.location} />}
+            {project.year && <Meta label="Год" value={project.year} />}
+            {project.style && <Meta label="Стиль" value={project.style} />}
           </div>
+        )}
 
-          <div className="flex flex-col gap-8">
-            {project.clientTask && (
-              <div>
+        {hasNarrative && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-14">
+            {project.description && (
+              <div className="md:col-span-2">
                 <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">
-                  Задача клиента
+                  Описание проекта
                 </p>
-                <p className="text-stone leading-relaxed">{project.clientTask}</p>
+                <p className="text-stone text-lg leading-relaxed">
+                  {project.description}
+                </p>
               </div>
             )}
-            {project.materials && (
-              <div>
-                <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">
-                  Материалы
-                </p>
-                <p className="text-stone leading-relaxed">{project.materials}</p>
-              </div>
-            )}
+
+            <div className="flex flex-col gap-8">
+              {project.clientTask && (
+                <div>
+                  <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">
+                    Задача клиента
+                  </p>
+                  <p className="text-stone leading-relaxed">{project.clientTask}</p>
+                </div>
+              )}
+              {project.materials && (
+                <div>
+                  <p className="text-accent text-xs tracking-[0.4em] uppercase mb-3">
+                    Материалы
+                  </p>
+                  <p className="text-stone leading-relaxed">{project.materials}</p>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Gallery */}
         <p className="text-accent text-xs tracking-[0.4em] uppercase mb-6">
           Галерея {project.photoCount ? `· ${project.photoCount} фото` : ""}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {project.photos.map((src, i) => (
-            <div key={i} className="overflow-hidden bg-fog aspect-[4/3]">
-              <img
-                src={src}
-                alt={`${project.title} — фото ${i + 1}`}
-                loading="lazy"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-          ))}
+          {project.photos.map((photo, i) => {
+            const src = typeof photo === "string" ? photo : photo.src;
+            const alt =
+              typeof photo === "string"
+                ? `${project.title} — фото ${i + 1}`
+                : photo.alt;
+
+            return (
+              <div key={src} className="overflow-hidden bg-fog aspect-[4/3]">
+                <img
+                  src={src}
+                  alt={alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -145,8 +145,92 @@ export const projects = [
       "/projects/lukomorye/photo-10.webp",
     ],
   },
+  {
+    id: 6,
+    slug: "profsoyuznaya-209",
+    title: "Профсоюзная 209",
+    type: "apartment",
+    typeLabel: "Квартира",
+    photoCount: 18,
+    cover: "/projects/profsoyuznaya-209/cover.webp",
+    photos: [
+      {
+        src: "/projects/profsoyuznaya-209/photo-01.webp",
+        alt: "Кухня-гостиная с обеденной зоной",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-02.webp",
+        alt: "Общий вид гостиной и столовой",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-03.webp",
+        alt: "Гостиная с диванной группой",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-04.webp",
+        alt: "Столовая и гостиная",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-05.webp",
+        alt: "Кухня, общий вид",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-06.webp",
+        alt: "Кухня с обеденным столом",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-07.webp",
+        alt: "Рабочая зона кухни",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-08.webp",
+        alt: "Спальня, вид из угла",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-09.webp",
+        alt: "Спальня, общий вид",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-10.webp",
+        alt: "Спальня с мягким изголовьем",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-11.webp",
+        alt: "Спальня с телевизионной зоной",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-12.webp",
+        alt: "Ванная комната, общий вид",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-13.webp",
+        alt: "Ванная комната с тумбой",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-14.webp",
+        alt: "Постирочная",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-15.webp",
+        alt: "Холл со встроенным шкафом",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-16.webp",
+        alt: "Просторный холл квартиры",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-17.webp",
+        alt: "Прихожая",
+      },
+      {
+        src: "/projects/profsoyuznaya-209/photo-18.webp",
+        alt: "Гостиная, дополнительный ракурс",
+      },
+    ],
+  },
   // Площадь / местоположение / год / стиль / описание для проекта «Лукоморье»,
-  // а также для трёх проектов выше, не указаны — уточнить у клиента.
+  // проекта «Профсоюзная 209», а также для трёх проектов выше,
+  // не указаны — уточнить у клиента.
 ];
 
 export const projectTypes = [
