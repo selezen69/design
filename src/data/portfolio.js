@@ -8,7 +8,7 @@ export const projects = [
     slug: "dom-so-vtorym-svetom",
     title: "Дом со вторым светом",
     type: "house",
-    typeLabel: "Загородная резиденция",
+    typeLabel: "Загородный дом",
     area: 320,
     location: "Московская область",
     year: 2017,
@@ -45,6 +45,7 @@ export const projects = [
     title: "Лофт в саду",
     type: "house",
     typeLabel: "Загородный дом",
+    location: "Московская область",
     style: "Лофт с элементами кантри",
     clientTask:
       "Создать уютное пространство для отдыха на природе с характером городского лофта.",
@@ -74,6 +75,7 @@ export const projects = [
     title: "Бирюзовый акцент",
     type: "apartment",
     typeLabel: "Квартира",
+    location: "Москва",
     style: "Современный с цветным акцентом",
     clientTask:
       "Создать современный интерьер с ярким акцентом, который задаёт настроение всей квартире.",
@@ -101,6 +103,7 @@ export const projects = [
     title: "Тёплая классика",
     type: "apartment",
     typeLabel: "Квартира",
+    location: "Москва",
     style: "Классический тёплый",
     clientTask:
       "Создать тёплый классический интерьер, комфортный для повседневной жизни.",
@@ -151,6 +154,7 @@ export const projects = [
     title: "Квартира с видом в сад",
     type: "apartment",
     typeLabel: "Квартира",
+    location: "Москва · Профсоюзная",
     photoCount: 18,
     cover: "/projects/profsoyuznaya-209/photo-02.webp",
     photos: [
@@ -234,6 +238,7 @@ export const projects = [
     title: "Гаага",
     type: "apartment",
     typeLabel: "Квартира",
+    location: "Гаага · Нидерланды",
     photoCount: 5,
     cover: "/projects/gaaga/cover.webp",
     photos: [
@@ -265,6 +270,7 @@ export const projects = [
     title: "Городская графика",
     type: "apartment",
     typeLabel: "Квартира",
+    location: "Москва · Barkli",
     photoCount: 5,
     cover: "/projects/barkli/cover.webp",
     photos: [
@@ -296,6 +302,7 @@ export const projects = [
     title: "Крестовский остров",
     type: "apartment",
     typeLabel: "Квартира",
+    location: "Санкт-Петербург",
     photoCount: 4,
     cover: "/projects/krestovsky-ostrov/cover.webp",
     photos: [
