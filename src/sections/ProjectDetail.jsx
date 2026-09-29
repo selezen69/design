@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { projectSubtitle } from "../utils/projectDisplay";
 
 const FOCUSABLE_SELECTOR =
@@ -7,6 +7,7 @@ const FOCUSABLE_SELECTOR =
 export default function ProjectDetail({ project, onClose }) {
   const dialogRef = useRef(null);
   const backButtonRef = useRef(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -20,7 +21,27 @@ export default function ProjectDetail({ project, onClose }) {
     backButtonRef.current?.focus();
 
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
+      if (lightboxIndex !== null) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          setLightboxIndex(null);
+          return;
+        }
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          setLightboxIndex((current) =>
+            current === null ? null : (current - 1 + project.photos.length) % project.photos.length
+          );
+          return;
+        }
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          setLightboxIndex((current) =>
+            current === null ? null : (current + 1) % project.photos.length
+          );
+          return;
+        }
+      } else if (e.key === "Escape") {
         onClose();
         return;
       }
@@ -48,7 +69,7 @@ export default function ProjectDetail({ project, onClose }) {
       document.removeEventListener("keydown", handleKeyDown);
       previouslyFocused?.focus?.();
     };
-  }, [onClose]);
+  }, [onClose, lightboxIndex, project]);
 
   if (!project) return null;
 
@@ -168,18 +189,93 @@ export default function ProjectDetail({ project, onClose }) {
                 : photo.alt;
 
             return (
-              <div key={src} className="group overflow-hidden bg-fog aspect-[4/3] cursor-zoom-in">
+              <button
+                key={src}
+                type="button"
+                onClick={() => setLightboxIndex(i)}
+                className="group overflow-hidden bg-fog aspect-[4/3] cursor-zoom-in text-left"
+                aria-label={`Открыть фото ${i + 1} из ${project.photos.length}`}
+              >
                 <img
                   src={src}
                   alt={alt}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.08]"
                 />
-              </div>
+              </button>
             );
           })}
         </div>
       </div>
+
+      {lightboxIndex !== null && (() => {
+        const currentPhoto = project.photos[lightboxIndex];
+        const currentSrc = typeof currentPhoto === "string" ? currentPhoto : currentPhoto.src;
+        const currentAlt =
+          typeof currentPhoto === "string"
+            ? `${project.title} — фото ${lightboxIndex + 1}`
+            : currentPhoto.alt;
+
+        return (
+          <div
+            className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Просмотр фотографии"
+            onClick={() => setLightboxIndex(null)}
+          >
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex(null);
+              }}
+              className="absolute top-5 right-5 md:top-7 md:right-8 z-20 text-white/80 hover:text-white text-sm tracking-[0.2em] uppercase px-3 py-2"
+              aria-label="Закрыть увеличенное фото"
+            >
+              Закрыть ×
+            </button>
+
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex((lightboxIndex - 1 + project.photos.length) % project.photos.length);
+              }}
+              className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 md:w-14 md:h-14 rounded-full border border-white/30 text-white text-3xl flex items-center justify-center hover:bg-white/10"
+              aria-label="Предыдущее фото"
+            >
+              ‹
+            </button>
+
+            <div
+              className="max-w-[92vw] max-h-[88vh] flex flex-col items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={currentSrc}
+                alt={currentAlt}
+                className="max-w-[92vw] max-h-[82vh] object-contain select-none"
+              />
+              <div className="mt-4 text-white/65 text-xs tracking-[0.25em] uppercase">
+                {String(lightboxIndex + 1).padStart(2, "0")} / {String(project.photos.length).padStart(2, "0")}
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex((lightboxIndex + 1) % project.photos.length);
+              }}
+              className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 md:w-14 md:h-14 rounded-full border border-white/30 text-white text-3xl flex items-center justify-center hover:bg-white/10"
+              aria-label="Следующее фото"
+            >
+              ›
+            </button>
+          </div>
+        );
+      })()}
     </div>
   );
 }
