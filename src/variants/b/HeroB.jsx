@@ -1,6 +1,5 @@
 import { projectSubtitle } from "../../utils/projectDisplay";
 import { projects } from "../../data/portfolio";
-import { useMotionMode } from "../../hooks/useMotionMode";
 
 const heroProject = projects[0];
 
@@ -20,7 +19,7 @@ const heroProject = projects[0];
  * hero-fade-up. Композиция, текст и фото не меняются в обоих режимах.
  */
 export default function HeroB() {
-  const { lively } = useMotionMode();
+  const lively = true; // утверждённая анимационная версия hero
 
   return (
     <section className="relative bg-cream pt-28">
