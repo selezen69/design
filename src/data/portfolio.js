@@ -290,8 +290,36 @@ export const projects = [
       },
     ],
   },
+  {
+    id: 9,
+    slug: "krestovsky-ostrov",
+    title: "Крестовский остров",
+    type: "apartment",
+    typeLabel: "Квартира",
+    photoCount: 4,
+    cover: "/projects/krestovsky-ostrov/cover.webp",
+    photos: [
+      {
+        src: "/projects/krestovsky-ostrov/photo-01.webp",
+        alt: "Гостиная с угловым диваном и ярким арт-объектом",
+      },
+      {
+        src: "/projects/krestovsky-ostrov/photo-02.webp",
+        alt: "Гостиная с панорамными окнами и телевизионной зоной",
+      },
+      {
+        src: "/projects/krestovsky-ostrov/photo-03.webp",
+        alt: "Кухня-столовая с прозрачными стульями",
+      },
+      {
+        src: "/projects/krestovsky-ostrov/photo-04.webp",
+        alt: "Спальня с мягким изголовьем и настенным светильником",
+      },
+    ],
+  },
   // Площадь / местоположение / год / стиль / описание для проекта «Лукоморье»,
-  // проектов «Профсоюзная 209», «Гаага» и «Баркли», а также для трёх проектов выше,
+  // проектов «Профсоюзная 209», «Гаага», «Баркли» и «Крестовский остров»,
+  // а также для трёх проектов выше,
   // не указаны — уточнить у клиента.
 ];
 
