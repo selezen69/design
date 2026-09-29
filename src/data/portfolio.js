@@ -228,8 +228,39 @@ export const projects = [
       },
     ],
   },
+  {
+    id: 7,
+    slug: "gaaga",
+    title: "Гаага",
+    type: "apartment",
+    typeLabel: "Квартира",
+    photoCount: 5,
+    cover: "/projects/gaaga/cover.webp",
+    photos: [
+      {
+        src: "/projects/gaaga/photo-01.webp",
+        alt: "Кухня-столовая с барной стойкой",
+      },
+      {
+        src: "/projects/gaaga/photo-02.webp",
+        alt: "Гостиная с модульным диваном",
+      },
+      {
+        src: "/projects/gaaga/photo-03.webp",
+        alt: "Кабинет-гостиная с рабочим местом",
+      },
+      {
+        src: "/projects/gaaga/photo-04.webp",
+        alt: "Спальня с деревянной стеновой панелью",
+      },
+      {
+        src: "/projects/gaaga/photo-05.webp",
+        alt: "Санузел в тёмном камне",
+      },
+    ],
+  },
   // Площадь / местоположение / год / стиль / описание для проекта «Лукоморье»,
-  // проекта «Профсоюзная 209», а также для трёх проектов выше,
+  // проектов «Профсоюзная 209» и «Гаага», а также для трёх проектов выше,
   // не указаны — уточнить у клиента.
 ];
 
