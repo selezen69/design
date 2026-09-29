@@ -71,7 +71,7 @@ export const projects = [
   {
     id: 3,
     slug: "kvartira-s-biryuzovym-aktsentom",
-    title: "Квартира с бирюзовым акцентом",
+    title: "Бирюзовый акцент",
     type: "apartment",
     typeLabel: "Квартира",
     style: "Современный с цветным акцентом",
@@ -148,7 +148,7 @@ export const projects = [
   {
     id: 6,
     slug: "profsoyuznaya-209",
-    title: "Профсоюзная 209",
+    title: "Квартира с видом в сад",
     type: "apartment",
     typeLabel: "Квартира",
     photoCount: 18,
@@ -262,7 +262,7 @@ export const projects = [
   {
     id: 8,
     slug: "barkli",
-    title: "Баркли",
+    title: "Городская графика",
     type: "apartment",
     typeLabel: "Квартира",
     photoCount: 5,
