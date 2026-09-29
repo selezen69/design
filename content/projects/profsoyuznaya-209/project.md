@@ -9,5 +9,5 @@
 описание проекта:
 использованные материалы:
 количество фотографий: 18
-обложка: /projects/profsoyuznaya-209/cover.webp
+обложка: /projects/profsoyuznaya-209/photo-02.webp
 ---
