@@ -152,7 +152,7 @@ export const projects = [
     type: "apartment",
     typeLabel: "Квартира",
     photoCount: 18,
-    cover: "/projects/profsoyuznaya-209/cover.webp",
+    cover: "/projects/profsoyuznaya-209/photo-02.webp",
     photos: [
       {
         src: "/projects/profsoyuznaya-209/photo-01.webp",
