@@ -43,12 +43,12 @@ export default function HeroB() {
               className="font-serif text-[clamp(2.25rem,5vw,4.25rem)] text-graphite font-light leading-[1.05]"
             >
               <span className="block overflow-hidden">
-                <span className="block animate-[hero-line-up_0.7s_cubic-bezier(0.16,1,0.3,1)_0.28s_both]">
+                <span className="block animate-[hero-line-up_0.9s_cubic-bezier(0.16,1,0.3,1)_0.25s_both]">
                   Пространство,
                 </span>
               </span>
               <span className="block overflow-hidden">
-                <span className="block animate-[hero-line-up_0.7s_cubic-bezier(0.16,1,0.3,1)_0.38s_both]">
+                <span className="block animate-[hero-line-up_0.9s_cubic-bezier(0.16,1,0.3,1)_0.42s_both]">
                   которое живёт
                 </span>
               </span>
@@ -68,7 +68,7 @@ export default function HeroB() {
             key={lively ? "subhead-lively" : "subhead-calm"}
             className={
               lively
-                ? "mt-6 max-w-sm text-stone text-base leading-relaxed opacity-0 animate-[hero-fade-up_0.6s_ease-out_0.62s_forwards]"
+                ? "mt-6 max-w-sm text-stone text-base leading-relaxed opacity-0 animate-[hero-fade-up_0.8s_ease-out_0.72s_forwards]"
                 : "mt-6 max-w-sm text-stone text-base leading-relaxed opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.4s_forwards]"
             }
           >
@@ -80,7 +80,7 @@ export default function HeroB() {
             key={lively ? "cta-lively" : "cta-calm"}
             className={
               lively
-                ? "mt-9 flex flex-wrap items-center gap-x-8 gap-y-4 opacity-0 animate-[hero-fade-up_0.6s_ease-out_0.71s_forwards]"
+                ? "mt-9 flex flex-wrap items-center gap-x-8 gap-y-4 opacity-0 animate-[hero-fade-up_0.8s_ease-out_0.9s_forwards]"
                 : "mt-9 flex flex-wrap items-center gap-x-8 gap-y-4 opacity-0 animate-[hero-fade-up_0.9s_ease-out_0.55s_forwards]"
             }
           >
@@ -121,14 +121,14 @@ export default function HeroB() {
           key={lively ? "photo-lively" : "photo-calm"}
           className={
             lively
-              ? "lg:col-span-7 relative order-1 lg:order-2 aspect-[4/3] lg:aspect-auto overflow-hidden opacity-0 animate-[hero-photo-lift-lively_1150ms_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards]"
+              ? "lg:col-span-7 relative order-1 lg:order-2 aspect-[4/3] lg:aspect-auto overflow-hidden opacity-0 animate-[hero-photo-lift-lively_1400ms_cubic-bezier(0.16,1,0.3,1)_0.12s_forwards]"
               : "lg:col-span-7 relative order-1 lg:order-2 aspect-[4/3] lg:aspect-auto overflow-hidden opacity-0 animate-[photo-lift-calm_650ms_ease-out_0.15s_forwards]"
           }
         >
           <div
             className={
               lively
-                ? "absolute inset-0 overflow-hidden animate-[photo-scale-in_1150ms_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards]"
+                ? "absolute inset-0 overflow-hidden animate-[photo-scale-in_1400ms_cubic-bezier(0.16,1,0.3,1)_0.12s_forwards]"
                 : "absolute inset-0 overflow-hidden"
             }
           >
@@ -136,7 +136,7 @@ export default function HeroB() {
               src="/projects/dom-so-vtorym-svetom/photo-01.jpg"
               alt={heroProject.title}
               fetchPriority="high"
-              className="absolute inset-0 w-full h-full object-cover animate-[hero-kenburns-subtle_28s_ease-in-out_infinite_alternate]"
+              className="absolute inset-0 w-full h-full object-cover animate-[hero-kenburns-subtle_18s_ease-in-out_infinite_alternate]"
             />
           </div>
           <div className="absolute bottom-0 left-0 right-0 px-6 pt-5 pb-6 lg:px-10 lg:pb-10 bg-gradient-to-t from-graphite/60 to-transparent">
@@ -147,7 +147,7 @@ export default function HeroB() {
           {lively && (
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-cream animate-[hero-panel-slide_1150ms_cubic-bezier(0.65,0,0.35,1)_0.2s_forwards]"
+              className="absolute inset-0 bg-cream animate-[hero-panel-slide_1450ms_cubic-bezier(0.65,0,0.35,1)_0.08s_forwards]"
             />
           )}
         </div>
