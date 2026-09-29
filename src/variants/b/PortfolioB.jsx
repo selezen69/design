@@ -190,7 +190,7 @@ function Spread({ project, index, total, spread, onClick, lively }) {
           style={lively && !visible ? { transform: "scale(1.045)" } : undefined}
         >
           <img
-            src={spread.imageOverride ?? project.cover}
+            src={project.slug === "loft-v-sadu" && spread.imageOverride ? spread.imageOverride : project.cover}
             alt={project.title}
             loading="lazy"
             className={`w-full h-full object-cover transition-transform duration-[1000ms] ease-out ${
