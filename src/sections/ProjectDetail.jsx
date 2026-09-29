@@ -93,7 +93,7 @@ export default function ProjectDetail({ project, onClose }) {
           <img
             src={project.cover}
             alt={project.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-graphite/85 via-graphite/20 to-transparent sm:from-graphite/70 sm:via-graphite/10" />
           <div className="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-6 pb-8 sm:pb-10 w-full">
@@ -168,12 +168,12 @@ export default function ProjectDetail({ project, onClose }) {
                 : photo.alt;
 
             return (
-              <div key={src} className="overflow-hidden bg-fog aspect-[4/3]">
+              <div key={src} className="group overflow-hidden bg-fog aspect-[4/3] cursor-zoom-in">
                 <img
                   src={src}
                   alt={alt}
                   loading="lazy"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.08]"
                 />
               </div>
             );
