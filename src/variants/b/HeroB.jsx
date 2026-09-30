@@ -1,8 +1,61 @@
-import { projectSubtitle } from "../../utils/projectDisplay";
-import { projects } from "../../data/portfolio";
+import { useEffect, useRef } from "react";
 import { useMotionMode } from "../../hooks/useMotionMode";
 
-const heroProject = projects[0];
+function useArchitecturalKeyMotion(sceneRef, lively) {
+  useEffect(() => {
+    const scene = sceneRef.current;
+    if (!scene || !lively || typeof window === "undefined") return undefined;
+
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    if (coarsePointer) return undefined;
+
+    let frame = 0;
+
+    const setSceneVariables = (x, y) => {
+      scene.style.setProperty("--hero-pointer-x", `${x * 13}px`);
+      scene.style.setProperty("--hero-pointer-y", `${y * 10}px`);
+      scene.style.setProperty("--hero-key-tilt-x", `${y * -4}deg`);
+      scene.style.setProperty("--hero-key-tilt-y", `${x * 5}deg`);
+      scene.style.setProperty("--hero-bg-x", `${x * -5}px`);
+      scene.style.setProperty("--hero-bg-y", `${y * -4}px`);
+    };
+
+    const onPointerMove = (event) => {
+      const rect = scene.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => setSceneVariables(x, y));
+    };
+
+    const onPointerLeave = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => setSceneVariables(0, 0));
+    };
+
+    const onScroll = () => {
+      const rect = scene.getBoundingClientRect();
+      const progress = Math.min(
+        1,
+        Math.max(0, -rect.top / Math.max(rect.height * 0.72, 1))
+      );
+      scene.style.setProperty("--hero-key-turn", `${progress * 52}deg`);
+      scene.style.setProperty("--hero-key-lift", `${progress * 22}px`);
+    };
+
+    scene.addEventListener("pointermove", onPointerMove);
+    scene.addEventListener("pointerleave", onPointerLeave);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      cancelAnimationFrame(frame);
+      scene.removeEventListener("pointermove", onPointerMove);
+      scene.removeEventListener("pointerleave", onPointerLeave);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [lively, sceneRef]);
+}
 
 /**
  * Вариант B — «Редакционный журнал» (утверждённое направление).
@@ -21,6 +74,8 @@ const heroProject = projects[0];
  */
 export default function HeroB() {
   const { lively } = useMotionMode();
+  const sceneRef = useRef(null);
+  useArchitecturalKeyMotion(sceneRef, lively);
 
   return (
     <section className="relative bg-cream pt-28">
@@ -115,16 +170,19 @@ export default function HeroB() {
           </div>
         </div>
 
-        {/* Фото — колонки 6–12, full-bleed вправо. Спокойно: короткий
-            подъём 14px/650ms, без масштаба. Живее: подъём 38px/1150ms +
-            одновременный scale(1.045→1) изображения + журнальная панель. */}
+        {/* Сцена — колонки 6–12, full-bleed вправо. Фон и ключ разделены,
+            чтобы ключ реагировал на курсор и поворачивался при прокрутке,
+            а сама предметная композиция сохраняла спокойный журнальный тон. */}
         <div
           key={lively ? "photo-lively" : "photo-calm"}
+          ref={sceneRef}
           className={
             lively
-              ? "lg:col-span-7 relative order-1 lg:order-2 aspect-[4/3] lg:aspect-auto overflow-hidden opacity-0 animate-[hero-photo-lift-lively_1150ms_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards]"
-              : "lg:col-span-7 relative order-1 lg:order-2 aspect-[4/3] lg:aspect-auto overflow-hidden opacity-0 animate-[photo-lift-calm_650ms_ease-out_0.15s_forwards]"
+              ? "architect-hero-scene lg:col-span-7 relative order-1 lg:order-2 aspect-[4/3] lg:aspect-auto overflow-hidden opacity-0 animate-[hero-photo-lift-lively_1150ms_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards]"
+              : "architect-hero-scene lg:col-span-7 relative order-1 lg:order-2 aspect-[4/3] lg:aspect-auto overflow-hidden opacity-0 animate-[photo-lift-calm_650ms_ease-out_0.15s_forwards]"
           }
+          role="img"
+          aria-label="Рабочий стол дизайнера с чертежом, образцами материалов и архитектурным ключом"
         >
           <div
             className={
@@ -134,15 +192,32 @@ export default function HeroB() {
             }
           >
             <img
-              src="/projects/dom-so-vtorym-svetom/photo-01.jpg"
-              alt={heroProject.title}
+              src="/hero/designer-desk.webp"
+              alt=""
               fetchPriority="high"
-              className="absolute inset-0 w-full h-full object-cover animate-[hero-kenburns-subtle_28s_ease-in-out_infinite_alternate]"
+              className={`architect-hero-background absolute inset-0 w-full h-full object-cover ${
+                lively ? "architect-hero-background--moving" : ""
+              }`}
             />
           </div>
-          <div className="absolute bottom-0 left-0 right-0 px-6 pt-5 pb-6 lg:px-10 lg:pb-10 bg-gradient-to-t from-graphite/60 to-transparent">
+
+          <div aria-hidden="true" className="architect-hero-glow" />
+          <div aria-hidden="true" className="architect-hero-key-stage">
+            <img
+              src="/hero/architectural-key.webp"
+              alt=""
+              className={`architect-hero-key ${
+                lively ? "architect-hero-key--moving" : ""
+              }`}
+            />
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 z-20 px-6 pt-10 pb-6 lg:px-10 lg:pb-10 bg-gradient-to-t from-graphite/55 via-graphite/15 to-transparent pointer-events-none">
             <p className="text-cream/90 text-xs tracking-[0.2em] uppercase">
-              Фото — «{heroProject.title}», {projectSubtitle(heroProject)}
+              Эскиз · материал · пространство
+            </p>
+            <p className="mt-2 hidden lg:block text-cream/70 text-[11px] tracking-[0.12em] uppercase">
+              Ключ к интерьеру начинается с точного плана
             </p>
           </div>
           {lively && (
