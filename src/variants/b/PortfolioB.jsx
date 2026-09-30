@@ -33,11 +33,18 @@ import RevealLine from "../shared/RevealLine";
  * которые сейчас в зоне видимости — здесь достаточно читать `visible`.
  */
 const SPREADS = [
-  { imageOverride: null, ratio: "lg:aspect-[3/2]", textCol: "lg:col-start-8 lg:col-span-5", photoCol: "lg:col-start-1 lg:col-span-6" },
-  { imageOverride: "/projects/zelenyi-mys/photo-01.jpg", ratio: "lg:aspect-[3/2]", textCol: "lg:col-start-1 lg:col-span-5", photoCol: "lg:col-start-7 lg:col-span-6" },
-  { imageOverride: null, ratio: "lg:aspect-[3/2]", textCol: "lg:col-start-8 lg:col-span-5", photoCol: "lg:col-start-1 lg:col-span-5" },
-  { imageOverride: null, ratio: "lg:aspect-[3/2]", textCol: "lg:col-start-1 lg:col-span-5", photoCol: "lg:col-start-7 lg:col-span-6" },
+  { ratio: "lg:aspect-[3/2]", textCol: "lg:col-start-8 lg:col-span-5", photoCol: "lg:col-start-1 lg:col-span-6" },
+  { ratio: "lg:aspect-[3/2]", textCol: "lg:col-start-1 lg:col-span-5", photoCol: "lg:col-start-7 lg:col-span-6" },
+  { ratio: "lg:aspect-[3/2]", textCol: "lg:col-start-8 lg:col-span-5", photoCol: "lg:col-start-1 lg:col-span-5" },
+  { ratio: "lg:aspect-[3/2]", textCol: "lg:col-start-1 lg:col-span-5", photoCol: "lg:col-start-7 lg:col-span-6" },
 ];
+
+// У «Лофта в саду» для журнальной карточки выбран отдельный ракурс.
+// Привязка идёт к проекту, а не к позиции карточки: иначе этот кадр
+// повторялся у каждого четвёртого проекта при расширении портфолио.
+const PROJECT_COVER_OVERRIDES = {
+  "loft-v-sadu": "/projects/zelenyi-mys/photo-01.jpg",
+};
 
 const PHOTO_MAGNITUDE = 38; // px — "Живее": 36–40px
 
@@ -190,7 +197,7 @@ function Spread({ project, index, total, spread, onClick, lively }) {
           style={lively && !visible ? { transform: "scale(1.045)" } : undefined}
         >
           <img
-            src={spread.imageOverride ?? project.cover}
+            src={PROJECT_COVER_OVERRIDES[project.slug] ?? project.cover}
             alt={project.title}
             loading="lazy"
             className={`w-full h-full object-cover transition-transform duration-[1000ms] ease-out ${
