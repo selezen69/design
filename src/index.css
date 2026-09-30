@@ -105,8 +105,6 @@
   --hero-bg-y: 0px;
   --hero-key-tilt-x: 0deg;
   --hero-key-tilt-y: 0deg;
-  --hero-key-turn: 0deg;
-  --hero-key-lift: 0px;
   background: #d8ccbb;
   perspective: 1200px;
   isolation: isolate;
@@ -152,12 +150,12 @@
   transform:
     translate3d(
       calc(-50% + var(--hero-pointer-x)),
-      calc(-50% + var(--hero-pointer-y) - var(--hero-key-lift)),
+      calc(-50% + var(--hero-pointer-y)),
       0
     )
     rotateX(var(--hero-key-tilt-x))
     rotateY(var(--hero-key-tilt-y))
-    rotateZ(calc(-12deg + var(--hero-key-turn)));
+    rotateZ(-12deg);
   transform-origin: 50% 55%;
   transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
   filter: drop-shadow(0 28px 24px rgba(55, 37, 16, 0.28));
@@ -173,7 +171,7 @@
 }
 
 .architect-hero-key--moving {
-  animation: architect-key-float 5.8s ease-in-out infinite alternate;
+  animation: architect-key-float 5.2s ease-in-out infinite alternate;
 }
 
 @keyframes architect-background-breathe {
@@ -186,8 +184,8 @@
 }
 
 @keyframes architect-key-float {
-  from { transform: translateY(-4px) scale(0.985); }
-  to { transform: translateY(6px) scale(1.015); }
+  from { transform: translateY(-5px) rotate(-0.8deg) scale(0.99); }
+  to { transform: translateY(7px) rotate(0.8deg) scale(1.015); }
 }
 
 @media (max-width: 1023px) {
@@ -207,7 +205,7 @@
   }
 
   .architect-hero-key--moving {
-    animation: architect-key-float-mobile 7s ease-in-out infinite alternate;
+    animation: architect-key-float-mobile 4.6s ease-in-out infinite alternate;
   }
 
   .architect-hero-glow {
@@ -216,8 +214,8 @@
 }
 
 @keyframes architect-key-float-mobile {
-  from { transform: translateY(-2px); }
-  to { transform: translateY(3px); }
+  from { transform: translateY(-7px) rotate(-1.4deg) scale(0.985); }
+  to { transform: translateY(9px) rotate(1.4deg) scale(1.025); }
 }
 
 /* motion-spec.md §8 — обязательная деградация под prefers-reduced-motion.

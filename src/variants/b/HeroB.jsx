@@ -1,23 +1,26 @@
 import { useEffect, useRef } from "react";
 import { useMotionMode } from "../../hooks/useMotionMode";
 
-function useArchitecturalKeyMotion(sceneRef, lively) {
+function useArchitecturalKeyMotion(sceneRef) {
   useEffect(() => {
     const scene = sceneRef.current;
-    if (!scene || !lively || typeof window === "undefined") return undefined;
+    if (!scene || typeof window === "undefined") return undefined;
 
     const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
-    if (coarsePointer) return undefined;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (coarsePointer || reducedMotion) return undefined;
 
     let frame = 0;
 
     const setSceneVariables = (x, y) => {
-      scene.style.setProperty("--hero-pointer-x", `${x * 13}px`);
-      scene.style.setProperty("--hero-pointer-y", `${y * 10}px`);
-      scene.style.setProperty("--hero-key-tilt-x", `${y * -4}deg`);
-      scene.style.setProperty("--hero-key-tilt-y", `${x * 5}deg`);
-      scene.style.setProperty("--hero-bg-x", `${x * -5}px`);
-      scene.style.setProperty("--hero-bg-y", `${y * -4}px`);
+      scene.style.setProperty("--hero-pointer-x", `${x * 24}px`);
+      scene.style.setProperty("--hero-pointer-y", `${y * 18}px`);
+      scene.style.setProperty("--hero-key-tilt-x", `${y * -7}deg`);
+      scene.style.setProperty("--hero-key-tilt-y", `${x * 9}deg`);
+      scene.style.setProperty("--hero-bg-x", `${x * -7}px`);
+      scene.style.setProperty("--hero-bg-y", `${y * -5}px`);
     };
 
     const onPointerMove = (event) => {
@@ -33,28 +36,15 @@ function useArchitecturalKeyMotion(sceneRef, lively) {
       frame = requestAnimationFrame(() => setSceneVariables(0, 0));
     };
 
-    const onScroll = () => {
-      const rect = scene.getBoundingClientRect();
-      const progress = Math.min(
-        1,
-        Math.max(0, -rect.top / Math.max(rect.height * 0.72, 1))
-      );
-      scene.style.setProperty("--hero-key-turn", `${progress * 52}deg`);
-      scene.style.setProperty("--hero-key-lift", `${progress * 22}px`);
-    };
-
     scene.addEventListener("pointermove", onPointerMove);
     scene.addEventListener("pointerleave", onPointerLeave);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
 
     return () => {
       cancelAnimationFrame(frame);
       scene.removeEventListener("pointermove", onPointerMove);
       scene.removeEventListener("pointerleave", onPointerLeave);
-      window.removeEventListener("scroll", onScroll);
     };
-  }, [lively, sceneRef]);
+  }, [sceneRef]);
 }
 
 /**
@@ -75,7 +65,7 @@ function useArchitecturalKeyMotion(sceneRef, lively) {
 export default function HeroB() {
   const { lively } = useMotionMode();
   const sceneRef = useRef(null);
-  useArchitecturalKeyMotion(sceneRef, lively);
+  useArchitecturalKeyMotion(sceneRef);
 
   return (
     <section className="relative bg-cream pt-28">
@@ -171,7 +161,7 @@ export default function HeroB() {
         </div>
 
         {/* Сцена — колонки 6–12, full-bleed вправо. Фон и ключ разделены,
-            чтобы ключ реагировал на курсор и поворачивался при прокрутке,
+            чтобы ключ реагировал на курсор независимо от режима движения,
             а сама предметная композиция сохраняла спокойный журнальный тон. */}
         <div
           key={lively ? "photo-lively" : "photo-calm"}
@@ -206,9 +196,7 @@ export default function HeroB() {
             <img
               src="/hero/architectural-key.webp"
               alt=""
-              className={`architect-hero-key ${
-                lively ? "architect-hero-key--moving" : ""
-              }`}
+              className="architect-hero-key architect-hero-key--moving"
             />
           </div>
 
