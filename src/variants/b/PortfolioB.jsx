@@ -72,7 +72,7 @@ export default function PortfolioB({ onSelectProject, id = "portfolio" }) {
             </h2>
             {lively && <RevealLine visible={headerVisible} delayMs={120} className="w-16 mt-4" />}
           </div>
-          <div className="flex gap-8">
+          <div className="flex flex-wrap gap-x-8 gap-y-3 md:justify-end">
             {projectTypes.map((t) => (
               <button
                 key={t.value}

@@ -342,8 +342,88 @@ export const projects = [
       },
     ],
   },
+  {
+    id: 12,
+    slug: "dji-office-showroom",
+    title: "DJI — офис и шоурум",
+    type: "public",
+    typeLabel: "Офис и шоурум",
+    photoCount: 3,
+    description:
+      "Монохромное пространство офиса и шоурума с демонстрационными островами, сетчатой перегородкой и выразительной графикой бренда.",
+    cover: "/projects/dji-office-showroom/photo-01.webp",
+    photos: [
+      {
+        src: "/projects/dji-office-showroom/photo-01.webp",
+        alt: "Шоурум DJI с демонстрационными островами и сетчатой перегородкой",
+      },
+      {
+        src: "/projects/dji-office-showroom/photo-02.webp",
+        alt: "Торговый зал DJI с витринами и зоной демонстрации техники",
+      },
+      {
+        src: "/projects/dji-office-showroom/photo-03.webp",
+        alt: "Офис и сервисная зона DJI",
+      },
+    ],
+  },
+  {
+    id: 13,
+    slug: "philips-office-showroom",
+    title: "Philips — офис и шоурум",
+    type: "public",
+    typeLabel: "Офис и шоурум",
+    photoCount: 6,
+    description:
+      "Светлое двухуровневое пространство, где офисные переговорные объединены с открытым шоурумом и яркими продуктовыми экспозициями.",
+    cover: "/projects/philips-office-showroom/photo-01.webp",
+    photos: [
+      {
+        src: "/projects/philips-office-showroom/photo-01.webp",
+        alt: "Главная зона шоурума Philips со стойкой ресепшен",
+      },
+      {
+        src: "/projects/philips-office-showroom/photo-02.webp",
+        alt: "Переговорная Philips с геометрической стеновой панелью",
+      },
+      {
+        src: "/projects/philips-office-showroom/photo-03.webp",
+        alt: "Переговорная Philips с реечным потолком",
+      },
+      {
+        src: "/projects/philips-office-showroom/photo-04.webp",
+        alt: "Шоурум Philips с длинной графической стеной и демонстрационными столами",
+      },
+      {
+        src: "/projects/philips-office-showroom/photo-05.webp",
+        alt: "Торговый зал Philips с яркими продуктовыми островами",
+      },
+      {
+        src: "/projects/philips-office-showroom/photo-06.webp",
+        alt: "Экспозиция бытовой техники в шоуруме Philips",
+      },
+    ],
+  },
+  {
+    id: 14,
+    slug: "cafe-basmannaya",
+    title: "Кафе «Басманная»",
+    type: "public",
+    typeLabel: "Кафе",
+    photoCount: 1,
+    description:
+      "Интерьер кафе с пластичным деревянным потолком, открытой конструкцией навеса и графичной перегородкой, напоминающей силуэты деревьев.",
+    cover: "/projects/cafe-basmannaya/photo-01.webp",
+    photos: [
+      {
+        src: "/projects/cafe-basmannaya/photo-01.webp",
+        alt: "Основной зал кафе с деревянным потолком и графичной перегородкой",
+      },
+    ],
+  },
   // Площадь / местоположение / год / стиль / описание для проектов
-  // «Профсоюзная 209», «Апартаменты», «Гаага», «Баркли», «Крестовский остров» и «Руза»,
+  // «Профсоюзная 209», «Апартаменты», «Гаага», «Баркли», «Крестовский остров»,
+  // «Руза», DJI, Philips и кафе «Басманная»,
   // а также для двух проектов выше,
   // не указаны — уточнить у клиента.
 ];
@@ -352,4 +432,5 @@ export const projectTypes = [
   { value: "all", label: "Все" },
   { value: "apartment", label: "Квартиры" },
   { value: "house", label: "Дома" },
+  { value: "public", label: "Общественные пространства" },
 ];
