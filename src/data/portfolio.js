@@ -175,6 +175,54 @@ export const projects = [
     ],
   },
   {
+    id: 11,
+    slug: "apartments",
+    title: "Апартаменты",
+    type: "apartment",
+    typeLabel: "Апартаменты",
+    location: "Москва",
+    photoCount: 9,
+    cover: "/projects/apartments/photo-01.webp",
+    photos: [
+      {
+        src: "/projects/apartments/photo-01.webp",
+        alt: "Гостиная-столовая с чёрными архитектурными акцентами",
+      },
+      {
+        src: "/projects/apartments/photo-02.webp",
+        alt: "Гостиная с мягкой мебелью и деревянным панно",
+      },
+      {
+        src: "/projects/apartments/photo-03.webp",
+        alt: "Компактная белая кухня в обрамлении тёмных стеллажей",
+      },
+      {
+        src: "/projects/apartments/photo-04.webp",
+        alt: "Открытый чёрный стеллаж в гостиной",
+      },
+      {
+        src: "/projects/apartments/photo-05.webp",
+        alt: "Диванная зона у окна",
+      },
+      {
+        src: "/projects/apartments/photo-06.webp",
+        alt: "Светлая спальня с деревянными дверями",
+      },
+      {
+        src: "/projects/apartments/photo-07.webp",
+        alt: "Зеркало и двери спальни с рисунком шеврон",
+      },
+      {
+        src: "/projects/apartments/photo-08.webp",
+        alt: "Санузел с деревянной подвесной тумбой",
+      },
+      {
+        src: "/projects/apartments/photo-09.webp",
+        alt: "Постирочная зона в санузле",
+      },
+    ],
+  },
+  {
     id: 7,
     slug: "gaaga",
     title: "Гаага",
@@ -295,7 +343,7 @@ export const projects = [
     ],
   },
   // Площадь / местоположение / год / стиль / описание для проектов
-  // «Профсоюзная 209», «Гаага», «Баркли», «Крестовский остров» и «Руза»,
+  // «Профсоюзная 209», «Апартаменты», «Гаага», «Баркли», «Крестовский остров» и «Руза»,
   // а также для двух проектов выше,
   // не указаны — уточнить у клиента.
 ];
